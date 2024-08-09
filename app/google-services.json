@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "910373220398",
+    "project_id": "readgood-16917",
+    "storage_bucket": "readgood-16917.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910373220398:android:496b45ddc758e6449aafbf",
+        "android_client_info": {
+          "package_name": "com.rakarguntara.readgood"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2j-Ysbg_TiZarvlVauftr43pD9H7H3HU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
