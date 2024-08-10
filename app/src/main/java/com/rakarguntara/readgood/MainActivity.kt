@@ -12,15 +12,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.rakarguntara.readgood.ui.theme.ReadGoodTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             ReadGoodTheme {
+
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+
                     Greeting(
+
                         name = "Asep dragon",
                         modifier = Modifier.padding(innerPadding)
                     )
