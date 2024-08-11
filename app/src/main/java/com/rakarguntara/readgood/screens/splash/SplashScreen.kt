@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.rakarguntara.readgood.navigation.ReadScreens
 import kotlinx.coroutines.delay
 
 @Composable
@@ -38,6 +39,7 @@ fun SplashScreen(navController: NavHostController) {
             }))
 
         delay(2000L)
+        navController.navigate(ReadScreens.LoginScreen.name)
     }
 
     Surface(modifier = Modifier.size(300.dp)
