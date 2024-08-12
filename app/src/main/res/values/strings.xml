@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ReadGood</string>
+    <string name="input_email_and_password_with_character_more_or_equal_than_6">Input email and password with character more or equal than 6</string>
 </resources>
