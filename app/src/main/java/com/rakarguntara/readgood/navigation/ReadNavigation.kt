@@ -6,7 +6,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rakarguntara.readgood.screens.home.HomeScreen
 import com.rakarguntara.readgood.screens.login.LoginScreen
-import com.rakarguntara.readgood.screens.register.RegisterScreen
 import com.rakarguntara.readgood.screens.splash.SplashScreen
 
 @Composable
@@ -19,10 +18,6 @@ fun ReadNavigation() {
 
         composable(ReadScreens.LoginScreen.name){
             LoginScreen(navController)
-        }
-
-        composable(ReadScreens.RegisterScreen.name){
-            RegisterScreen(navController)
         }
 
         composable(ReadScreens.HomeScreen.name){

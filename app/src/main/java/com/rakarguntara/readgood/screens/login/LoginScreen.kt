@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,12 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.rakarguntara.readgood.components.TextTitle
 import com.rakarguntara.readgood.components.UserForm
+import com.rakarguntara.readgood.navigation.ReadScreens
+import com.rakarguntara.readgood.viewmodel.login.LoginViewModel
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun LoginScreen(navController: NavHostController, loginViewModel: LoginViewModel = viewModel()) {
     val showLoginForm = rememberSaveable{
         mutableStateOf(true)
     }
@@ -36,11 +38,19 @@ fun LoginScreen(navController: NavHostController) {
             TextTitle()
             if(showLoginForm.value) {
                 UserForm(loading = false, isRegister = false) { email, password ->
-
+                    loginViewModel.signIn(email, password){
+                        navController.navigate(ReadScreens.HomeScreen.name){
+                            popUpTo(ReadScreens.LoginScreen.name){inclusive = true}
+                        }
+                    }
                 }
             } else {
                 UserForm(loading = false, isRegister = true) {email,password ->
-
+                    loginViewModel.createAccount(email, password){
+                        navController.navigate(ReadScreens.LoginScreen.name){
+                            popUpTo(ReadScreens.LoginScreen.name){inclusive = true}
+                        }
+                    }
                 }
             }
             Row(verticalAlignment = Alignment.CenterVertically,

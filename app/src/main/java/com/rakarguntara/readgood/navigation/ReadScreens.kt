@@ -3,7 +3,6 @@ package com.rakarguntara.readgood.navigation
 enum class ReadScreens {
     SplashScreen,
     LoginScreen,
-    RegisterScreen,
     HomeScreen,
     DetailScreen,
     UpdateScreen,
@@ -14,7 +13,6 @@ enum class ReadScreens {
             when (route.substringBefore("/")){
                 SplashScreen.name -> SplashScreen
                 LoginScreen.name -> LoginScreen
-                RegisterScreen.name -> RegisterScreen
                 HomeScreen.name -> HomeScreen
                 DetailScreen.name -> DetailScreen
                 UpdateScreen.name -> UpdateScreen
