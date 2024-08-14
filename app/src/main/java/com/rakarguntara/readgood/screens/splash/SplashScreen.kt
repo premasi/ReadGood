@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.google.firebase.auth.FirebaseAuth
 import com.rakarguntara.readgood.components.TextTitle
 import com.rakarguntara.readgood.navigation.ReadScreens
 import kotlinx.coroutines.delay
@@ -36,7 +37,12 @@ fun SplashScreen(navController: NavHostController) {
             }))
 
         delay(2000L)
-        navController.navigate(ReadScreens.LoginScreen.name)
+//        if(FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()){
+            navController.navigate(ReadScreens.LoginScreen.name)
+//        } else {
+//            navController.navigate(ReadScreens.HomeScreen.name)
+//        }
+
     }
 
     Surface(modifier = Modifier.size(300.dp)

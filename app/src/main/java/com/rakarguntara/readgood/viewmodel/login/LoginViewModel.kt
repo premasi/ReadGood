@@ -8,7 +8,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.rakarguntara.readgood.models.UserModel
 import com.rakarguntara.readgood.network.LoadingState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +27,8 @@ class LoginViewModel : ViewModel(){
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful){
+                        val displayName = task.result.user?.email?.split("@")!![0]
+                        createUserStore(displayName)
                         home()
                         Log.d("Login Success", "createAccount: ${task.result}")
                     } else {
@@ -43,6 +47,18 @@ class LoginViewModel : ViewModel(){
         }catch (e: Exception){
             Log.d("Register Exception", "createAccount: ${e.message}")
         }
+    }
+
+    private fun createUserStore(displayName: String) {
+        val userId = auth.currentUser?.uid
+        val user = UserModel(userId = userId!!,
+            displayName = displayName,
+            quote = "Life",
+            avatarUrl = "",
+            profession = "Dragon",
+            id = null).toMap()
+
+        FirebaseFirestore.getInstance().collection("users").add(user)
     }
 
     fun createAccount(email: String, password: String, home: () -> Unit) = viewModelScope.launch {
