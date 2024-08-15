@@ -37,18 +37,18 @@ fun SplashScreen(navController: NavHostController) {
             }))
 
         delay(2000L)
-//        if(FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()){
+        if(FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()){
             navController.navigate(ReadScreens.LoginScreen.name)
-//        } else {
-//            navController.navigate(ReadScreens.HomeScreen.name)
-//        }
+        } else {
+            navController.navigate(ReadScreens.HomeScreen.name)
+        }
 
     }
 
     Surface(modifier = Modifier.size(300.dp)
         .scale(scale.value)
         .background(Color.Transparent)
-        .border(2.dp, Color.Red, shape = CircleShape),
+        .border(2.dp, Color.Green, shape = CircleShape),
         shape = CircleShape,){
         Column(modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,

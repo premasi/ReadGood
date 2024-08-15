@@ -12,7 +12,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.rakarguntara.readgood.models.UserModel
 import com.rakarguntara.readgood.network.LoadingState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
@@ -51,14 +50,25 @@ class LoginViewModel : ViewModel(){
 
     private fun createUserStore(displayName: String) {
         val userId = auth.currentUser?.uid
-        val user = UserModel(userId = userId!!,
-            displayName = displayName,
-            quote = "Life",
-            avatarUrl = "",
-            profession = "Dragon",
-            id = null).toMap()
 
-        FirebaseFirestore.getInstance().collection("users").add(user)
+
+        val store = FirebaseFirestore.getInstance().collection("users").document(userId!!)
+        store.get().addOnSuccessListener{doc ->
+            if(!doc.exists()){
+                val user = UserModel(userId = userId!!,
+                    displayName = displayName,
+                    quote = "Life",
+                    avatarUrl = "",
+                    profession = "Dragon").toMap()
+
+                store.set(user)
+            } else {
+                Log.d("Firestore", "User data already exists.")
+            }
+        }.addOnFailureListener { e ->
+            Log.w("Firestore", "Error checking user data", e)
+        }
+
     }
 
     fun createAccount(email: String, password: String, home: () -> Unit) = viewModelScope.launch {

@@ -1,6 +1,6 @@
 package com.rakarguntara.readgood.models
 
-data class UserModel(val id: String? = null,
+data class UserModel(
     val userId: String,
     val displayName: String,
     val avatarUrl: String,
