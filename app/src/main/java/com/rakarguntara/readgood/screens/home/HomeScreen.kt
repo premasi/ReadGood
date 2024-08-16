@@ -1,11 +1,15 @@
 package com.rakarguntara.readgood.screens.home
 
+import android.util.Log
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -24,6 +28,7 @@ import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.rakarguntara.readgood.components.FABContent
 import com.rakarguntara.readgood.models.BookModel
+import com.rakarguntara.readgood.widgets.ListBookCard
 import com.rakarguntara.readgood.widgets.ReadAppBar
 
 @Composable
@@ -41,6 +46,14 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
 
 @Composable
 fun HomeContent(navController: NavController){
+    val listOfBooks = listOf(
+        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
+        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
+        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
+        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
+        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
+        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
+    )
     val displayName = if(!FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()){
         FirebaseAuth.getInstance().currentUser?.email?.split("@")!![0]
     } else {
@@ -61,6 +74,28 @@ fun HomeContent(navController: NavController){
             HorizontalDivider(modifier = Modifier.padding(8.dp))
             TitleSection(Modifier,"Progress")
         }
+        ReadNow(books = listOf(), navController = navController)
+        TitleSection(modifier = Modifier, label = "Reading List")
+        BookListArea(listOfBooks = listOfBooks, navController = navController)
+    }
+}
+
+@Composable
+fun BookListArea(listOfBooks: List<BookModel>, navController: NavController) {
+    HorizontalScrollableComponents(listOfBooks){
+        Log.d("Dummy Data", "BookListArea: $it")
+    }
+}
+
+@Composable
+fun HorizontalScrollableComponents(listOfBooks: List<BookModel>, onCardPressed: (String) -> Unit) {
+    val scrollState = rememberScrollState()
+    Row(modifier = Modifier.fillMaxWidth().height(280.dp).horizontalScroll(scrollState)) {
+        for(book in listOfBooks){
+            ListBookCard(book){
+                onCardPressed(it)
+            }
+        }
 
     }
 }
@@ -78,6 +113,9 @@ fun TitleSection(modifier: Modifier, label: String){
 
 @Composable
 fun ReadNow(books: List<BookModel>, navController: NavController){
+    ListBookCard {
+
+    }
 }
 
 
