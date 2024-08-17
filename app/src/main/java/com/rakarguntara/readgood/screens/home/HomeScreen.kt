@@ -28,6 +28,7 @@ import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.rakarguntara.readgood.components.FABContent
 import com.rakarguntara.readgood.models.BookModel
+import com.rakarguntara.readgood.navigation.ReadScreens
 import com.rakarguntara.readgood.widgets.ListBookCard
 import com.rakarguntara.readgood.widgets.ReadAppBar
 
@@ -36,7 +37,9 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
     Scaffold(topBar = {
         ReadAppBar("Read Good", navController = navController)
     }, floatingActionButton = {
-       FABContent{}
+       FABContent{
+           navController.navigate(ReadScreens.SearchScreen.name)
+       }
     }) {
         Surface(modifier = Modifier.padding(it).fillMaxSize().padding(horizontal = 8.dp)) {
             HomeContent(navController)
