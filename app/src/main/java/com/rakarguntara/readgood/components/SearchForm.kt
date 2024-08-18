@@ -8,9 +8,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.rakarguntara.readgood.viewmodel.search.SearchViewModel
 
 @Composable
 fun SearchForm(
+    viewModel: SearchViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
     loading: Boolean = false,
     hint: String = "Search",

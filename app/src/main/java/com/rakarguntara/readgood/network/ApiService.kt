@@ -9,12 +9,12 @@ import javax.inject.Singleton
 
 @Singleton
 interface ApiService {
-    @GET("/volumes")
+    @GET("volumes")
     suspend fun getAllBookByQuery(
         @Query("q") query: String
     ) : BookModelResponse
 
-    @GET("/volumes/{bookId}")
+    @GET("volumes/{bookId}")
     suspend fun getBookInfoById(
         @Path("bookId") id: String
     ): BookDetailModelResponse

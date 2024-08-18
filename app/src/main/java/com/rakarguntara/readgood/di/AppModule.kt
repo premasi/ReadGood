@@ -2,6 +2,7 @@ package com.rakarguntara.readgood.di
 
 import com.rakarguntara.readgood.BuildConfig
 import com.rakarguntara.readgood.network.ApiService
+import com.rakarguntara.readgood.repository.NetworkRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +17,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Singleton
+    @Provides
+    fun provideNetworkRepository(apiService: ApiService) = NetworkRepository(apiService)
+
     @Singleton
     @Provides
     fun provideApi(): ApiService{
