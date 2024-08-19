@@ -61,7 +61,7 @@ fun ListBookCardRow(
                     color = Color.LightGray,
                     modifier = Modifier.padding(bottom = 4.dp)
                 )
-                Text("[${item.language}]", fontSize = 12.sp,
+                Text("[${item.categories}]", fontSize = 12.sp,
                     fontStyle = FontStyle.Italic,
                     color = Color.LightGray
                 )
