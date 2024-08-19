@@ -14,7 +14,7 @@ data class BookModelResponse(
 	val items: List<ItemsItem>
 )
 
-data class VolumeInfoDetail(
+data class VolumeInfo(
 
 	@field:SerializedName("industryIdentifiers")
 	val industryIdentifiers: List<IndustryIdentifiersItem>,
@@ -26,7 +26,7 @@ data class VolumeInfoDetail(
 	val printType: String? = null,
 
 	@field:SerializedName("readingModes")
-	val readingModes: ReadingModesDetail? = null,
+	val readingModes: ReadingModes? = null,
 
 	@field:SerializedName("previewLink")
 	val previewLink: String? = null,
@@ -44,13 +44,13 @@ data class VolumeInfoDetail(
 	val title: String? = null,
 
 	@field:SerializedName("imageLinks")
-	val imageLinks: ImageLinksDetail? = null,
+	val imageLinks: ImageLinks? = null,
 
 	@field:SerializedName("subtitle")
 	val subtitle: String? = null,
 
 	@field:SerializedName("panelizationSummary")
-	val panelizationSummary: PanelizationSummaryDetail? = null,
+	val panelizationSummary: PanelizationSummary? = null,
 
 	@field:SerializedName("publisher")
 	val publisher: String? = null,
@@ -101,7 +101,7 @@ data class RetailPrice(
 	val amountInMicros: Long? = null
 )
 
-data class ReadingModesDetail(
+data class ReadingModes(
 
 	@field:SerializedName("image")
 	val image: Boolean? = null,
@@ -164,7 +164,7 @@ data class AccessInfo(
 	val viewability: String? = null,
 
 	@field:SerializedName("pdf")
-	val pdf: PdfDetail? = null,
+	val pdf: Pdf? = null,
 
 	@field:SerializedName("webReaderLink")
 	val webReaderLink: String? = null,
@@ -197,7 +197,7 @@ data class ItemsItem(
 	val kind: String? = null,
 
 	@field:SerializedName("volumeInfo")
-	val volumeInfo: VolumeInfoDetail? = null,
+	val volumeInfo: VolumeInfo? = null,
 
 	@field:SerializedName("etag")
 	val etag: String? = null,
@@ -212,7 +212,7 @@ data class ItemsItem(
 	val selfLink: String? = null
 )
 
-data class PdfDetail(
+data class Pdf(
 
 	@field:SerializedName("isAvailable")
 	val isAvailable: Boolean? = null,
@@ -242,7 +242,7 @@ data class IndustryIdentifiersItem(
 	val type: String? = null
 )
 
-data class PanelizationSummaryDetail(
+data class PanelizationSummary(
 
 	@field:SerializedName("containsImageBubbles")
 	val containsImageBubbles: Boolean? = null,
@@ -251,7 +251,7 @@ data class PanelizationSummaryDetail(
 	val containsEpubBubbles: Boolean? = null
 )
 
-data class ImageLinksDetail(
+data class ImageLinks(
 
 	@field:SerializedName("thumbnail")
 	val thumbnail: String? = null,

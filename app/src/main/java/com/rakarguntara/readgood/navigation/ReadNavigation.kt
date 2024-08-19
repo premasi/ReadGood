@@ -1,6 +1,7 @@
 package com.rakarguntara.readgood.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -9,6 +10,7 @@ import com.rakarguntara.readgood.screens.login.LoginScreen
 import com.rakarguntara.readgood.screens.search.SearchScreen
 import com.rakarguntara.readgood.screens.splash.SplashScreen
 import com.rakarguntara.readgood.screens.stats.StatsScreens
+import com.rakarguntara.readgood.viewmodel.search.SearchViewModel
 
 @Composable
 fun ReadNavigation() {
@@ -31,7 +33,8 @@ fun ReadNavigation() {
         }
 
         composable(ReadScreens.SearchScreen.name){
-            SearchScreen(navController)
+            val searchViewModel = hiltViewModel<SearchViewModel>()
+            SearchScreen(navController, searchViewModel)
         }
     }
 }

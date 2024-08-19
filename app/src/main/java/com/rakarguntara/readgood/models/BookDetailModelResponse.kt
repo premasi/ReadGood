@@ -38,7 +38,7 @@ data class AccessInfoDetail(
 	val viewability: String? = null,
 
 	@field:SerializedName("pdf")
-	val pdf: Pdf? = null,
+	val pdf: PdfDetail? = null,
 
 	@field:SerializedName("webReaderLink")
 	val webReaderLink: String? = null,
@@ -83,7 +83,7 @@ data class EpubDetail(
 	val downloadLink: String? = null
 )
 
-data class ReadingModes(
+data class ReadingModesDetail(
 
 	@field:SerializedName("image")
 	val image: Boolean? = null,
@@ -92,7 +92,7 @@ data class ReadingModes(
 	val text: Boolean? = null
 )
 
-data class VolumeInfo(
+data class VolumeInfoDetail(
 
 	@field:SerializedName("pageCount")
 	val pageCount: Int? = null,
@@ -101,7 +101,7 @@ data class VolumeInfo(
 	val printType: String? = null,
 
 	@field:SerializedName("readingModes")
-	val readingModes: ReadingModes? = null,
+	val readingModes: ReadingModesDetail? = null,
 
 	@field:SerializedName("previewLink")
 	val previewLink: String? = null,
@@ -116,13 +116,13 @@ data class VolumeInfo(
 	val title: String? = null,
 
 	@field:SerializedName("imageLinks")
-	val imageLinks: ImageLinks? = null,
+	val imageLinks: ImageLinksDetail? = null,
 
 	@field:SerializedName("subtitle")
 	val subtitle: String? = null,
 
 	@field:SerializedName("panelizationSummary")
-	val panelizationSummary: PanelizationSummary? = null,
+	val panelizationSummary: PanelizationSummaryDetail? = null,
 
 	@field:SerializedName("publisher")
 	val publisher: String? = null,
@@ -158,7 +158,7 @@ data class Dimensions(
 	val height: String? = null
 )
 
-data class PanelizationSummary(
+data class PanelizationSummaryDetail(
 
 	@field:SerializedName("containsImageBubbles")
 	val containsImageBubbles: Boolean? = null,
@@ -167,7 +167,7 @@ data class PanelizationSummary(
 	val containsEpubBubbles: Boolean? = null
 )
 
-data class Pdf(
+data class PdfDetail(
 
 	@field:SerializedName("isAvailable")
 	val isAvailable: Boolean? = null,
@@ -176,7 +176,7 @@ data class Pdf(
 	val downloadLink: String? = null
 )
 
-data class ImageLinks(
+data class ImageLinksDetail(
 
 	@field:SerializedName("small")
 	val small: String? = null,
