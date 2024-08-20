@@ -20,22 +20,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.rakarguntara.readgood.models.VolumeInfo
+import com.rakarguntara.readgood.models.ItemsItem
+import com.rakarguntara.readgood.navigation.ReadScreens
 
 @Composable
 fun ListBookCardRow(
-    item: VolumeInfo,
+    item: ItemsItem,
     navController: NavController
 ){
-    val imageUrl = if(item.imageLinks?.thumbnail == null) {
+    val imageUrl = if(item.volumeInfo?.imageLinks?.thumbnail == null) {
         "http://books.google.com/books/content?id=1GjXCQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
     } else {
-        item.imageLinks.thumbnail
+        item.volumeInfo.imageLinks.thumbnail
     }
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable {  }
+            .clickable {
+                navController.navigate(ReadScreens.DetailScreen.name + "/${item.id}")
+            }
             .padding(bottom = 8.dp),
         color = Color.White,
         shadowElevation = 5.dp
@@ -49,19 +52,19 @@ fun ListBookCardRow(
             Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Top) {
-                Text(item.title.toString(), fontSize = 14.sp, color = Color.Black,
+                Text(item.volumeInfo?.title.toString(), fontSize = 14.sp, color = Color.Black,
                     fontWeight = FontWeight.Bold)
-                Text(item.authors.toString(), fontSize = 12.sp,
+                Text(item.volumeInfo?.authors.toString(), fontSize = 12.sp,
                     fontStyle = FontStyle.Italic,
                     color = Color.LightGray,
                     modifier = Modifier.padding(vertical = 4.dp)
                     )
-                Text(item.publishedDate.toString(), fontSize = 12.sp,
+                Text(item.volumeInfo?.publishedDate.toString(), fontSize = 12.sp,
                     fontStyle = FontStyle.Italic,
                     color = Color.LightGray,
                     modifier = Modifier.padding(bottom = 4.dp)
                 )
-                Text("[${item.categories}]", fontSize = 12.sp,
+                Text("[${item.volumeInfo?.categories}]", fontSize = 12.sp,
                     fontStyle = FontStyle.Italic,
                     color = Color.LightGray
                 )

@@ -62,7 +62,7 @@ fun BookList(navController: NavController, searchViewModel: SearchViewModel) {
                     .fillMaxWidth()
             ) {
                 items(items = listOfBook){ book ->
-                    ListBookCardRow(book.volumeInfo!!, navController)
+                    ListBookCardRow(book, navController)
                 }
             }
         } else {

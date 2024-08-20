@@ -2,9 +2,12 @@ package com.rakarguntara.readgood.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.rakarguntara.readgood.screens.detail.DetailScreen
 import com.rakarguntara.readgood.screens.home.HomeScreen
 import com.rakarguntara.readgood.screens.login.LoginScreen
 import com.rakarguntara.readgood.screens.search.SearchScreen
@@ -35,6 +38,17 @@ fun ReadNavigation() {
         composable(ReadScreens.SearchScreen.name){
             val searchViewModel = hiltViewModel<SearchViewModel>()
             SearchScreen(navController, searchViewModel)
+        }
+
+        composable("${ReadScreens.DetailScreen.name}/{bookId}", arguments =
+            listOf(navArgument("bookId"){
+                type = NavType.StringType
+            })
+        ){ backStackEntry ->
+            backStackEntry.arguments?.getString("bookId").let { id ->
+                DetailScreen(navController = navController, bookId = id.toString())
+            }
+
         }
     }
 }
