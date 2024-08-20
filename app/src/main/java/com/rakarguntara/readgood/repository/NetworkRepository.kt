@@ -1,6 +1,5 @@
 package com.rakarguntara.readgood.repository
 
-import com.rakarguntara.readgood.models.BookDetailModelResponse
 import com.rakarguntara.readgood.models.ItemsItem
 import com.rakarguntara.readgood.network.ApiService
 import com.rakarguntara.readgood.network.ResponseState
@@ -20,13 +19,13 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService){
         return ResponseState(data = response)
     }
 
-    suspend fun getBookInfoById (id: String): ResponseState<BookDetailModelResponse,
-            Boolean, Exception> {
-        val response = try {
-            apiService.getBookInfoById(id)
-        } catch (e: Exception){
-            return ResponseState(e = e)
-        }
-        return ResponseState(data = response)
-    }
+//    suspend fun getBookInfoById (id: String): ResponseState<BookDetailModelResponse,
+//            Boolean, Exception> {
+//        val response = try {
+//            apiService.getBookInfoById(id)
+//        } catch (e: Exception){
+//            return ResponseState(e = e)
+//        }
+//        return ResponseState(data = response)
+//    }
 }

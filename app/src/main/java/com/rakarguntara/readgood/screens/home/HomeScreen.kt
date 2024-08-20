@@ -49,14 +49,6 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
 
 @Composable
 fun HomeContent(navController: NavController){
-    val listOfBooks = listOf(
-        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
-        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
-        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
-        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
-        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
-        BookModel(id = "1asd", title = "Test", author = "test", notes = null),
-    )
     val displayName = if(!FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()){
         FirebaseAuth.getInstance().currentUser?.email?.split("@")!![0]
     } else {
@@ -79,7 +71,7 @@ fun HomeContent(navController: NavController){
         }
         ReadNow(books = listOf(), navController = navController)
         TitleSection(modifier = Modifier, label = "Reading List")
-        BookListArea(listOfBooks = listOfBooks, navController = navController)
+//        BookListArea(listOfBooks = listOfBooks, navController = navController)
     }
 }
 

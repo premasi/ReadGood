@@ -2,6 +2,8 @@ package com.rakarguntara.readgood.screens.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,11 +28,14 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.firebase.firestore.FirebaseFirestore
 import com.rakarguntara.readgood.components.LoadingIndicator
 import com.rakarguntara.readgood.models.BookDetailModelResponse
+import com.rakarguntara.readgood.models.BookModel
 import com.rakarguntara.readgood.network.ResponseStateAlt
 import com.rakarguntara.readgood.viewmodel.detail.DetailViewModel
 import com.rakarguntara.readgood.widgets.ReadAppBar
+import com.rakarguntara.readgood.widgets.RoundedButton
 
 @Composable
 fun DetailScreen(navController: NavController, bookId: String,
@@ -69,7 +74,7 @@ fun DetailScreen(navController: NavController, bookId: String,
                             fontWeight = FontWeight.Bold
                         ),
                         modifier = Modifier.padding(bottom = 16.dp))
-                    DetailMainContent(bookInfo.data)
+                    DetailMainContent(bookInfo.data, navController)
                 }
 
             }
@@ -78,7 +83,7 @@ fun DetailScreen(navController: NavController, bookId: String,
 }
 
 @Composable
-fun DetailMainContent(data: BookDetailModelResponse){
+fun DetailMainContent(data: BookDetailModelResponse, navController: NavController){
 
     Card(shape = CircleShape) {
         AsyncImage(model = data.volumeInfo?.imageLinks?.thumbnail,
@@ -100,6 +105,23 @@ fun DetailMainContent(data: BookDetailModelResponse){
             }
         }", color = Color.Black)
         Text(text = "Publisher: ${data.volumeInfo?.publisher}", color = Color.Black)
+    }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        RoundedButton(label = "Save") {
+            val book = BookModel(
+
+            )
+//            saveToFirebase()
+            val db = FirebaseFirestore.getInstance()
+        }
+        Spacer(modifier = Modifier.padding(16.dp))
+        RoundedButton(label = "Cancel") {
+            navController.popBackStack()
+        }
     }
 
 
