@@ -1,5 +1,6 @@
 package com.rakarguntara.readgood.screens.detail
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.rakarguntara.readgood.components.LoadingIndicator
 import com.rakarguntara.readgood.models.BookDetailModelResponse
@@ -113,10 +115,14 @@ fun DetailMainContent(data: BookDetailModelResponse, navController: NavControlle
     ) {
         RoundedButton(label = "Save") {
             val book = BookModel(
-
+                id = data.id,
+                title = data.volumeInfo?.title,
+                author = data.volumeInfo?.authors.toString(),
+                pageCount = data.volumeInfo?.pageCount.toString(),
+                published = data.volumeInfo?.publishedDate,
+                publisher = data.volumeInfo?.publisher
             )
-//            saveToFirebase()
-            val db = FirebaseFirestore.getInstance()
+            saveToFirebase(book)
         }
         Spacer(modifier = Modifier.padding(16.dp))
         RoundedButton(label = "Cancel") {
@@ -125,4 +131,18 @@ fun DetailMainContent(data: BookDetailModelResponse, navController: NavControlle
     }
 
 
+}
+
+
+fun saveToFirebase(book: BookModel) {
+    val db = FirebaseFirestore.getInstance()
+    val dbCollection = db.collection("books").document(FirebaseAuth.getInstance().currentUser!!.uid)
+        .collection("added")
+    if(book.id.toString().isNotEmpty()){
+        dbCollection.add(book).addOnCompleteListener {
+            Log.d("SAVE SUCCESS", "saveToFirebase: Book save success")
+        }.addOnFailureListener {
+            Log.d("SAVE FAILED", "saveToFirebase: Book save failed")
+        }
+    }
 }
