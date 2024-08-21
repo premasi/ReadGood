@@ -13,6 +13,7 @@ import com.rakarguntara.readgood.screens.login.LoginScreen
 import com.rakarguntara.readgood.screens.search.SearchScreen
 import com.rakarguntara.readgood.screens.splash.SplashScreen
 import com.rakarguntara.readgood.screens.stats.StatsScreens
+import com.rakarguntara.readgood.viewmodel.home.HomeViewModel
 import com.rakarguntara.readgood.viewmodel.search.SearchViewModel
 
 @Composable
@@ -28,7 +29,8 @@ fun ReadNavigation() {
         }
 
         composable(ReadScreens.HomeScreen.name){
-            HomeScreen(navController)
+            val homeViewModel = hiltViewModel<HomeViewModel>()
+            HomeScreen(navController, homeViewModel)
         }
 
         composable(ReadScreens.StatsScreen.name){

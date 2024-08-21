@@ -57,7 +57,6 @@ fun ListBookCard(bookModel: BookModel = BookModel("a", "asd", "sdsd",
         colors = CardColors(
             containerColor = if(isPressed.value) Color.LightGray else Color.White,Color.White,Color.White,Color.White),
         modifier = Modifier.padding(end = 8.dp)
-            .height(250.dp)
             .width(200.dp)
             .clickable {
                 isPressed.value = true

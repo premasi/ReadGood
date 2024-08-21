@@ -24,16 +24,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.rakarguntara.readgood.components.FABContent
+import com.rakarguntara.readgood.components.LoadingIndicator
 import com.rakarguntara.readgood.models.BookModel
 import com.rakarguntara.readgood.navigation.ReadScreens
+import com.rakarguntara.readgood.viewmodel.home.HomeViewModel
 import com.rakarguntara.readgood.widgets.ListBookCard
 import com.rakarguntara.readgood.widgets.ReadAppBar
 
 @Composable
-fun HomeScreen(navController: NavController = NavController(LocalContext.current)) {
+fun HomeScreen(
+    navController: NavController = NavController(LocalContext.current),
+    homeViewModel: HomeViewModel = hiltViewModel()
+) {
     Scaffold(topBar = {
         ReadAppBar("Read Good", navController = navController)
     }, floatingActionButton = {
@@ -42,13 +48,22 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
        }
     }) {
         Surface(modifier = Modifier.padding(it).fillMaxSize().padding(horizontal = 8.dp)) {
-            HomeContent(navController)
+            HomeContent(navController, homeViewModel)
         }
     }
 }
 
 @Composable
-fun HomeContent(navController: NavController){
+fun HomeContent(navController: NavController, homeViewModel: HomeViewModel){
+    val listOfBooks = homeViewModel.data.value.data!!.toList().filter { book ->
+        book.userId.toString() == FirebaseAuth.getInstance().currentUser?.uid.toString()
+    }
+    if(homeViewModel.data.value.loading == true){
+        LoadingIndicator(true)
+    } else {
+        LoadingIndicator(false)
+    }
+
     val displayName = if(!FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()){
         FirebaseAuth.getInstance().currentUser?.email?.split("@")!![0]
     } else {
@@ -71,7 +86,7 @@ fun HomeContent(navController: NavController){
         }
         ReadNow(books = listOf(), navController = navController)
         TitleSection(modifier = Modifier, label = "Reading List")
-//        BookListArea(listOfBooks = listOfBooks, navController = navController)
+        BookListArea(listOfBooks = listOfBooks, navController = navController)
     }
 }
 

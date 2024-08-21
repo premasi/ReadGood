@@ -120,7 +120,8 @@ fun DetailMainContent(data: BookDetailModelResponse, navController: NavControlle
                 author = data.volumeInfo?.authors.toString(),
                 pageCount = data.volumeInfo?.pageCount.toString(),
                 published = data.volumeInfo?.publishedDate,
-                publisher = data.volumeInfo?.publisher
+                publisher = data.volumeInfo?.publisher,
+                userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
             )
             saveToFirebase(book)
         }
@@ -136,8 +137,7 @@ fun DetailMainContent(data: BookDetailModelResponse, navController: NavControlle
 
 fun saveToFirebase(book: BookModel) {
     val db = FirebaseFirestore.getInstance()
-    val dbCollection = db.collection("books").document(FirebaseAuth.getInstance().currentUser!!.uid)
-        .collection("added")
+    val dbCollection = db.collection("books")
     if(book.id.toString().isNotEmpty()){
         dbCollection.add(book).addOnCompleteListener {
             Log.d("SAVE SUCCESS", "saveToFirebase: Book save success")

@@ -1,7 +1,9 @@
 package com.rakarguntara.readgood.di
 
+import com.google.firebase.firestore.FirebaseFirestore
 import com.rakarguntara.readgood.BuildConfig
 import com.rakarguntara.readgood.network.ApiService
+import com.rakarguntara.readgood.repository.FirebaseRepository
 import com.rakarguntara.readgood.repository.NetworkRepository
 import dagger.Module
 import dagger.Provides
@@ -17,6 +19,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+    @Singleton
+    @Provides
+    fun provideFirebaseRepository() = FirebaseRepository(queryBook = FirebaseFirestore.getInstance()
+        .collection("books"))
 
     @Singleton
     @Provides

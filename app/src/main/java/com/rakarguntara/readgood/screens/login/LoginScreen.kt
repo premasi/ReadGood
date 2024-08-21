@@ -18,14 +18,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.rakarguntara.readgood.components.TextTitle
 import com.rakarguntara.readgood.components.UserForm
 import com.rakarguntara.readgood.navigation.ReadScreens
 import com.rakarguntara.readgood.viewmodel.login.LoginViewModel
 
 @Composable
-fun LoginScreen(navController: NavHostController, loginViewModel: LoginViewModel = viewModel()) {
+fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel = viewModel()) {
     val showLoginForm = rememberSaveable{
         mutableStateOf(true)
     }

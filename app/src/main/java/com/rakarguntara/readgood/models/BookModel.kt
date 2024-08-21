@@ -11,4 +11,5 @@ data class BookModel(
     var publisher: String? = null,
     var startRead: Timestamp? = null,
     var finishedRead: Timestamp? = null,
+    var userId : String? = null
 )
