@@ -16,7 +16,7 @@ enum class ReadScreens {
                 HomeScreen.name -> HomeScreen
                 DetailScreen.name -> DetailScreen
                 UpdateScreen.name -> UpdateScreen
-                StatsScreen.name -> UpdateScreen
+                StatsScreen.name -> StatsScreen
                 SearchScreen.name -> SearchScreen
                 else -> HomeScreen
             }

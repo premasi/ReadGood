@@ -55,13 +55,14 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(navController: NavController, homeViewModel: HomeViewModel){
-    val listOfBooks = homeViewModel.data.value.data!!.toList().filter { book ->
-        book.userId.toString() == FirebaseAuth.getInstance().currentUser?.uid.toString()
-    }
+    var listOfBooks = emptyList<BookModel>()
     if(homeViewModel.data.value.loading == true){
         LoadingIndicator(true)
     } else {
         LoadingIndicator(false)
+        listOfBooks = homeViewModel.data.value.data!!.toList().filter { book ->
+            book.userId.toString() == FirebaseAuth.getInstance().currentUser?.uid.toString()
+        }
     }
 
     val displayName = if(!FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()){
@@ -93,6 +94,7 @@ fun HomeContent(navController: NavController, homeViewModel: HomeViewModel){
 @Composable
 fun BookListArea(listOfBooks: List<BookModel>, navController: NavController) {
     HorizontalScrollableComponents(listOfBooks){
+        navController.navigate(ReadScreens.UpdateScreen.name + "/$it")
         Log.d("Dummy Data", "BookListArea: $it")
     }
 }
@@ -123,9 +125,9 @@ fun TitleSection(modifier: Modifier, label: String){
 
 @Composable
 fun ReadNow(books: List<BookModel>, navController: NavController){
-    ListBookCard {
-
-    }
+//    ListBookCard {
+//
+//    }
 }
 
 

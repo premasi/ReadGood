@@ -34,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.rakarguntara.readgood.components.LoadingIndicator
 import com.rakarguntara.readgood.models.BookDetailModelResponse
 import com.rakarguntara.readgood.models.BookModel
+import com.rakarguntara.readgood.navigation.ReadScreens
 import com.rakarguntara.readgood.network.ResponseStateAlt
 import com.rakarguntara.readgood.viewmodel.detail.DetailViewModel
 import com.rakarguntara.readgood.widgets.ReadAppBar
@@ -121,9 +122,11 @@ fun DetailMainContent(data: BookDetailModelResponse, navController: NavControlle
                 pageCount = data.volumeInfo?.pageCount.toString(),
                 published = data.volumeInfo?.publishedDate,
                 publisher = data.volumeInfo?.publisher,
+                photoUrl = data.volumeInfo?.imageLinks?.thumbnail,
+                notes = "",
                 userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
             )
-            saveToFirebase(book)
+            saveToFirebase(book, navController)
         }
         Spacer(modifier = Modifier.padding(16.dp))
         RoundedButton(label = "Cancel") {
@@ -135,11 +138,14 @@ fun DetailMainContent(data: BookDetailModelResponse, navController: NavControlle
 }
 
 
-fun saveToFirebase(book: BookModel) {
+fun saveToFirebase(book: BookModel, navController: NavController) {
     val db = FirebaseFirestore.getInstance()
     val dbCollection = db.collection("books")
     if(book.id.toString().isNotEmpty()){
         dbCollection.add(book).addOnCompleteListener {
+            navController.navigate(ReadScreens.HomeScreen.name){
+                popUpTo(ReadScreens.HomeScreen.name){inclusive = true}
+            }
             Log.d("SAVE SUCCESS", "saveToFirebase: Book save success")
         }.addOnFailureListener {
             Log.d("SAVE FAILED", "saveToFirebase: Book save failed")

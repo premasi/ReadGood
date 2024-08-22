@@ -1,8 +1,8 @@
 package com.rakarguntara.readgood.screens.stats
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 
 @Composable
-fun StatsScreens(navController: NavHostController) {
+fun StatsScreens(navController: NavController) {
 }

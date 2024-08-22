@@ -39,8 +39,7 @@ import com.rakarguntara.readgood.models.BookModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun ListBookCard(bookModel: BookModel = BookModel("a", "asd", "sdsd",
-    "sadasd"),  onPressDetails: (String) -> Unit = {}){
+fun ListBookCard(bookModel: BookModel,  onPressDetails: (String) -> Unit = {}){
     val context = LocalContext.current
     val resources = context.resources
     val displayMetrics = resources.displayMetrics
@@ -60,7 +59,7 @@ fun ListBookCard(bookModel: BookModel = BookModel("a", "asd", "sdsd",
             .width(200.dp)
             .clickable {
                 isPressed.value = true
-                onPressDetails.invoke(bookModel.title!!)
+                onPressDetails.invoke(bookModel.id!!)
             }
     ) {
         Column(modifier = Modifier.width(screenWidth.dp - (spacing * 2)),
@@ -68,7 +67,7 @@ fun ListBookCard(bookModel: BookModel = BookModel("a", "asd", "sdsd",
             Row(
                 horizontalArrangement = Arrangement.Center
             ) {
-                AsyncImage(model = "http://books.google.com/books/content?id=1GjXCQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api", contentDescription = "book potret",
+                AsyncImage(model = bookModel.photoUrl, contentDescription = "book potret",
                     modifier = Modifier.height(150.dp).width(100.dp).padding(5.dp))
 
                 Spacer(modifier = Modifier.width(50.dp))

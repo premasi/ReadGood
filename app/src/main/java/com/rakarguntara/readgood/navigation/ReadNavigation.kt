@@ -13,6 +13,7 @@ import com.rakarguntara.readgood.screens.login.LoginScreen
 import com.rakarguntara.readgood.screens.search.SearchScreen
 import com.rakarguntara.readgood.screens.splash.SplashScreen
 import com.rakarguntara.readgood.screens.stats.StatsScreens
+import com.rakarguntara.readgood.screens.update.UpdateScreen
 import com.rakarguntara.readgood.viewmodel.home.HomeViewModel
 import com.rakarguntara.readgood.viewmodel.search.SearchViewModel
 
@@ -50,7 +51,16 @@ fun ReadNavigation() {
             backStackEntry.arguments?.getString("bookId").let { id ->
                 DetailScreen(navController = navController, bookId = id.toString())
             }
+        }
 
+        composable("${ReadScreens.UpdateScreen.name}/{bookItemId}",
+            arguments = listOf(navArgument("bookItemId"){
+                type = NavType.StringType
+            })
+        ){ backStackEntry ->
+            backStackEntry.arguments?.getString("bookItemId").let { id ->
+                UpdateScreen(navController, bookItemId = id)
+            }
         }
     }
 }

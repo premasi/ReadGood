@@ -9,7 +9,10 @@ data class BookModel(
     var pageCount: String? = null,
     var published: String? = null,
     var publisher: String? = null,
+    var photoUrl: String? = null,
     var startRead: Timestamp? = null,
     var finishedRead: Timestamp? = null,
-    var userId : String? = null
+    var rating: Int = 0,
+    var userId : String? = null,
+    var notes: String? = null
 )
