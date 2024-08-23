@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -30,7 +31,7 @@ fun RatingBar(
     onPressRating: (Int) -> Unit
 ){
     var ratingState by remember {
-        mutableStateOf(rating)
+        mutableIntStateOf(rating)
     }
     var selected by remember {
         mutableStateOf(false)
@@ -57,8 +58,8 @@ fun RatingBar(
                         when(it.action){
                             MotionEvent.ACTION_DOWN -> {
                                 selected = true
-                                onPressRating(i)
                                 ratingState = i
+                                onPressRating(i)
                             }
                             MotionEvent.ACTION_UP -> {
                                 selected = false

@@ -140,9 +140,11 @@ fun DetailMainContent(data: BookDetailModelResponse, navController: NavControlle
 
 fun saveToFirebase(book: BookModel, navController: NavController) {
     val db = FirebaseFirestore.getInstance()
-    val dbCollection = db.collection("books")
+    val dbCollection = db.collection("data").document(
+        book.userId!!
+    ).collection("books").document(book.id!!)
     if(book.id.toString().isNotEmpty()){
-        dbCollection.add(book).addOnCompleteListener {
+        dbCollection.set(book).addOnCompleteListener {
             navController.navigate(ReadScreens.HomeScreen.name){
                 popUpTo(ReadScreens.HomeScreen.name){inclusive = true}
             }

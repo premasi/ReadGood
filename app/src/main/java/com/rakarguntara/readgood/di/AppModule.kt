@@ -1,5 +1,6 @@
 package com.rakarguntara.readgood.di
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.rakarguntara.readgood.BuildConfig
 import com.rakarguntara.readgood.network.ApiService
@@ -22,7 +23,9 @@ object AppModule {
     @Singleton
     @Provides
     fun provideFirebaseRepository() = FirebaseRepository(queryBook = FirebaseFirestore.getInstance()
-        .collection("books"))
+        .collection("data").document(
+            FirebaseAuth.getInstance().currentUser!!.uid
+        ).collection("books"))
 
     @Singleton
     @Provides
