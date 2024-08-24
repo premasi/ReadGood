@@ -80,7 +80,7 @@ fun ListBookCard(bookModel: BookModel,  onPressDetails: (String) -> Unit = {}){
                         modifier = Modifier.padding(bottom = 1.dp),
                         tint = Color.Black)
 
-                    BookRating(score = 3.5)
+                    BookRating(score = bookModel.rating.toDouble())
 
 
                 }
@@ -96,11 +96,15 @@ fun ListBookCard(bookModel: BookModel,  onPressDetails: (String) -> Unit = {}){
                 color = Color.LightGray,
                 style = MaterialTheme.typography.bodySmall)
 
+            val isStartedRead = remember {
+                mutableStateOf(false)
+            }
 
             Row(horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.Bottom,
                 modifier = Modifier.fillMaxWidth()) {
-                RoundedButton(label = "Reading", radius = 50)
+                isStartedRead.value = bookModel.startRead != null
+                RoundedButton(label = if(isStartedRead.value) "Reading" else "Added", radius = 50)
 
             }
         }

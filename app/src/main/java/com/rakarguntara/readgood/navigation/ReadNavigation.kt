@@ -35,7 +35,8 @@ fun ReadNavigation() {
         }
 
         composable(ReadScreens.StatsScreen.name){
-            StatsScreens(navController)
+            val homeViewModel = hiltViewModel<HomeViewModel>()
+            StatsScreens(navController, homeViewModel)
         }
 
         composable(ReadScreens.SearchScreen.name){
